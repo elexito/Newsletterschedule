@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\User;
+use App\Models\Subscriber;
 use Illuminate\Bus\Queueable;
 use App\Mail\NewsletterSample;
 use Illuminate\Support\Facades\Mail;
@@ -33,9 +33,12 @@ class MonthlyNewsletterJob implements ShouldQueue
      */
     public function handle()
     {
-        User::chunk(200, function ($users) {
-            foreach ($users as $user) {
-                Mail::to($user)->send(new NewsletterSample());
+        Subscriber::chunk(200, function ($subs) {
+            foreach ($subs as $sub) {
+                $sub_id = array("subscriber_id" => $sub->id);
+                $email = $sub->email;
+                Mail::to($sub->email)->send(new NewsletterSample($sub_id));
+
             }
         });
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/subscribe', [
+    UserController::class, 'subscribe'
+]);
+Route::post('/user/signin', [
+UserController::class, 'signin'
+]);
+Route::post('/task', [
+    TaskController::class, 'addTask'
+]);
+Route::get('/tasks', [
+    TaskController::class, 'getAllTasks'
+]);

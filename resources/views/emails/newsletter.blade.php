@@ -1,12 +1,14 @@
 @component('mail::message')
-# TuesDays of the month
+# Monthly Newsletter
 
 
 
-@component('mail::button', ['url' => ''])
+{{-- @component('mail::button', ['url' => ''])
 Button Text
+@endcomponent --}}
+
+Welcome to our Monthly Newsletter<br>
+{{ config('app.name') }},<br>
+To unsubscribe to this Newsletter, click the link below: <a href="http://localhost:8000/unsubscribe?id={{ $subscriber_id }}">Unsubscribe</a>
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent

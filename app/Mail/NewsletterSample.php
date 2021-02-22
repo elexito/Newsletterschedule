@@ -10,15 +10,16 @@ use Illuminate\Queue\SerializesModels;
 class NewsletterSample extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $subIdGlobal;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($subId)
     {
         //
+        $this->subIdGlobal = $subId;
     }
 
     /**
@@ -28,6 +29,6 @@ class NewsletterSample extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.newsletter');
+        return $this->markdown('emails.newsletter',$this->subIdGlobal);
     }
 }
